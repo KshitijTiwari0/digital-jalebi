@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import UserData from './components/UserData';
+import './App.css'; // Ensure CSS is imported
 
 const API_BASE = 'https://dummyjson.com/users';
 
@@ -35,21 +36,27 @@ const App = () => {
     <div className="app-container">
       <header>
         <h1>User Directory</h1>
-        <form onSubmit={handleSearch}>
-          <input
-            type="text"
-            placeholder="Search by name"
-            value={searchQuery}
-            onChange={(e) => setSearchQuery(e.target.value)}
-          />
-          <button type="submit">Search</button>
-        </form>
-      </header>
+        <nav className="nav-menu">
+        <a href="/">Home</a>
+        <a href="/about">About</a>
+        <a href="/contact">Contact</a>
+        </nav>
+        <form onSubmit={handleSearch} className="search-form">
+        <input
+          type="text"
+          placeholder="Search by name"
+          value={searchQuery}
+          onChange={(e) => setSearchQuery(e.target.value)}
+        />
+        <button type="submit">Search</button>
+      </form>
+    </header>
+
 
       <main className="user-card-grid">
-        {loading ? (
+        {loading? (
           <p>Loading...</p>
-        ) : error ? (
+        ) : error? (
           <p>Error: {error}</p>
         ) : (
           <UserData users={users} />
@@ -60,6 +67,3 @@ const App = () => {
 };
 
 export default App;
-
-
-
