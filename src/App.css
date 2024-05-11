@@ -7,7 +7,7 @@
 }
 
 header {
-  background-color: #f0f0f0;
+  background-color: #1401013b;
   padding: 20px;
   text-align: center;
   display: flex;
@@ -113,7 +113,7 @@ footer {
 }
 
 .user-details-expanded tr:nth-child(even) {
-  background-color: #f2f2f2;
+  background-color: #0a0a0a;
 }
 
 /* Responsive Design */
