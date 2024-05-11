@@ -20,12 +20,18 @@ header {
   display: flex;
   justify-content: center;
   gap: 20px;
-  margin-bottom: 20px; /* Add some space between nav and search form */
+  margin-bottom: 20px;
 }
 
 .nav-menu a {
   text-decoration: none;
   color: #007bff;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.nav-menu a:hover {
+  background-color: #ff7f27;
+  transform: translateY(-2px);
 }
 
 .search-form {
@@ -33,14 +39,14 @@ header {
   justify-content: center;
   gap: 10px;
   width: 100%;
-  max-width: 400px; /* Limit the width of the search form */
-  margin: 0 auto; /* Center the search form */
+  max-width: 400px;
+  margin: 0 auto;
 }
 
 .search-form input {
   padding: 5px;
   border: 1px solid #ccc;
-  flex-grow: 1; /* Allow the input to grow and fill the space */
+  flex-grow: 1;
 }
 
 .search-form button {
@@ -50,70 +56,27 @@ header {
   border: none;
   border-radius: 5px;
   cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.2s ease;
 }
 
-/* Other styles remain unchanged */
-
-footer {
-  background-color: #f0f0f0;
-  padding: 10px;
-  text-align: center;
+.search-form button:hover {
+  background-color: #ff7f27;
+  transform: translateY(-2px);
 }
 
-/* Card Grid */
-.user-card-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-  gap: 20px;
-  padding: 20px;
-}
-
-/* Individual Card */
-.user-card {
-  border: 1px solid #ccc;
-  border-radius: 8px;
-  padding: 15px;
-  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-}
-
-.user-avatar {
-  width: 100px;
-  height: 100px;
-  object-fit: cover;
+/* Spinner for loading */
+.spinner {
+  border: 4px solid rgba(0, 0, 0, 0.1);
+  width: 36px;
+  height: 36px;
   border-radius: 50%;
-  margin-bottom: 10px;
+  border-left-color: #007bff;
+  animation: spin 1s linear infinite;
 }
 
-.user-details {
-  text-align: center;
-}
-
-.view-details-btn {
-  background-color: #007bff;
-  color: white;
-  padding: 8px 15px;
-  border: none;
-  border-radius: 5px;
-  cursor: pointer;
-}
-
-/* Expanded Details */
-.user-details-expanded {
-  margin-top: 15px;
-}
-
-.user-details-expanded table {
-  border-collapse: collapse;
-  width: 100%;
-}
-
-.user-details-expanded th,.user-details-expanded td {
-  text-align: left;
-  padding: 8px;
-}
-
-.user-details-expanded tr:nth-child(even) {
-  background-color: #0a0a0a;
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
 }
 
 /* Responsive Design */
@@ -125,5 +88,9 @@ footer {
  .search-form {
     flex-direction: column;
     align-items: center;
+  }
+
+ .user-card {
+    animation: none!important;
   }
 }

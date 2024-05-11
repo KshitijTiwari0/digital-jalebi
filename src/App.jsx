@@ -1,6 +1,10 @@
 import React, { useEffect, useState } from 'react';
 import UserData from './components/UserData';
-import './App.css'; // Ensure CSS is imported
+import './App.css';
+import { gsap } from 'gsap';
+import { ScrollTrigger } from 'gsap/ScrollTrigger';
+
+gsap.registerPlugin(ScrollTrigger);
 
 const API_BASE = 'https://dummyjson.com/users';
 
@@ -24,38 +28,52 @@ const App = () => {
   };
 
   useEffect(() => {
-    fetchUsers(); // Fetch all users initially
+    fetchUsers();
   }, []);
 
   const handleSearch = (event) => {
     event.preventDefault();
-    fetchUsers(`/search?q=${searchQuery}`); // Search with the query
+    fetchUsers(`/search?q=${searchQuery}`);
   };
+
+  useEffect(() => {
+    gsap.from('.user-card', {
+      scrollTrigger: {
+        trigger: '.user-card',
+        toggleActions: 'play none none reverse'
+      },
+      x: -100,
+      opacity: 0,
+      stagger: 0.2
+    });
+
+    if (!loading) {
+      gsap.to('.spinner', { autoAlpha: 0, duration: 0.5 });
+    }
+  }, [loading]);
 
   return (
     <div className="app-container">
       <header>
         <h1>User Directory</h1>
         <nav className="nav-menu">
-        <a href="/">Home</a>
-        <a href="/about">About</a>
-        <a href="/contact">Contact</a>
+          <a href="/">Home</a>
+          <a href="/about">About</a>
+          <a href="/contact">Contact</a>
         </nav>
         <form onSubmit={handleSearch} className="search-form">
-        <input
-          type="text"
-          placeholder="Search by name"
-          value={searchQuery}
-          onChange={(e) => setSearchQuery(e.target.value)}
-        />
-        <button type="submit">Search</button>
-      </form>
-    </header>
-
-
+          <input
+            type="text"
+            placeholder="Search by name"
+            value={searchQuery}
+            onChange={(e) => setSearchQuery(e.target.value)}
+          />
+          <button type="submit">Search</button>
+        </form>
+      </header>
       <main className="user-card-grid">
         {loading? (
-          <p>Loading...</p>
+          <div className="spinner"></div>
         ) : error? (
           <p>Error: {error}</p>
         ) : (
